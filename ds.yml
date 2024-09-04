@@ -34,6 +34,7 @@ spec:
             memory: "1Gi"
             cpu: "1"
         imagePullPolicy: IfNotPresent
+
 ---
 # MySQL Service
 apiVersion: v1
@@ -45,6 +46,7 @@ spec:
   - port: 3306
   selector:
     app: mysql
+
 ---
 # Java Application Deployment
 apiVersion: apps/v1
@@ -93,6 +95,7 @@ spec:
             port: 8080
           initialDelaySeconds: 30
           timeoutSeconds: 5
+
 ---
 # Bank Application Service
 apiVersion: v1
