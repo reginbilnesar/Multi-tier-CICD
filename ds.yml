@@ -26,6 +26,14 @@ spec:
         ports:
         - containerPort: 3306
           name: mysql
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1"
+        imagePullPolicy: IfNotPresent
 ---
 # MySQL Service
 apiVersion: v1
@@ -65,6 +73,26 @@ spec:
           value: root
         - name: SPRING_DATASOURCE_PASSWORD
           value: Test@123
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1"
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
 ---
 # Bank Application Service
 apiVersion: v1
